@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Fix67s877vphmuajUQgVbEg853cyOXWkt1Pb3riGi+AO/t/s5GGauYFZgk/PREhSFxfg7syykf6Qaeoo/h5d1g==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\yjin\\OneDrive - soprema\\Documents\\MEGA\\WIP\\01-GitClone\\STUDY.Console.ExerciseTracker\\STUDY.Console.ExerciseTrackerTwo\\STUDY.Console.ExerciseTrackerTwo\\STUDY.Console.ExerciseTrackerTwo.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\yjin\\.nuget\\packages\\spectre.console\\0.49.1\\spectre.console.0.49.1.nupkg.sha512"
+  ],
+  "logs": []
+}

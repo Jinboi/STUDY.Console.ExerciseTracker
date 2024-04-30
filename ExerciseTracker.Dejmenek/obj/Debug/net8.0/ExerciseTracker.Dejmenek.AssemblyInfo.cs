@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ExerciseTracker.Dejmenek")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8c8a123e3cdb70e332a865f27769f657d0649e6a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3a10cedfdd96bf3fafd97699aac5afa21f244308")]
 [assembly: System.Reflection.AssemblyProductAttribute("ExerciseTracker.Dejmenek")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ExerciseTracker.Dejmenek")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

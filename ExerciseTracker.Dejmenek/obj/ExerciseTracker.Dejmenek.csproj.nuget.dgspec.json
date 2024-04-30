@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\yjin\\OneDrive - soprema\\Documents\\MEGA\\WIP\\01-GitClone\\CodeReviews.Console.ExerciseTracker\\ExerciseTracker.Dejmenek\\ExerciseTracker.Dejmenek.csproj": {}
+    "C:\\Users\\yjin\\OneDrive - soprema\\Documents\\MEGA\\WIP\\01-GitClone\\STUDY.Console.ExerciseTracker\\ExerciseTracker.Dejmenek\\ExerciseTracker.Dejmenek.csproj": {}
   },
   "projects": {
-    "C:\\Users\\yjin\\OneDrive - soprema\\Documents\\MEGA\\WIP\\01-GitClone\\CodeReviews.Console.ExerciseTracker\\ExerciseTracker.Dejmenek\\ExerciseTracker.Dejmenek.csproj": {
+    "C:\\Users\\yjin\\OneDrive - soprema\\Documents\\MEGA\\WIP\\01-GitClone\\STUDY.Console.ExerciseTracker\\ExerciseTracker.Dejmenek\\ExerciseTracker.Dejmenek.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yjin\\OneDrive - soprema\\Documents\\MEGA\\WIP\\01-GitClone\\CodeReviews.Console.ExerciseTracker\\ExerciseTracker.Dejmenek\\ExerciseTracker.Dejmenek.csproj",
+        "projectUniqueName": "C:\\Users\\yjin\\OneDrive - soprema\\Documents\\MEGA\\WIP\\01-GitClone\\STUDY.Console.ExerciseTracker\\ExerciseTracker.Dejmenek\\ExerciseTracker.Dejmenek.csproj",
         "projectName": "ExerciseTracker.Dejmenek",
-        "projectPath": "C:\\Users\\yjin\\OneDrive - soprema\\Documents\\MEGA\\WIP\\01-GitClone\\CodeReviews.Console.ExerciseTracker\\ExerciseTracker.Dejmenek\\ExerciseTracker.Dejmenek.csproj",
+        "projectPath": "C:\\Users\\yjin\\OneDrive - soprema\\Documents\\MEGA\\WIP\\01-GitClone\\STUDY.Console.ExerciseTracker\\ExerciseTracker.Dejmenek\\ExerciseTracker.Dejmenek.csproj",
         "packagesPath": "C:\\Users\\yjin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yjin\\OneDrive - soprema\\Documents\\MEGA\\WIP\\01-GitClone\\CodeReviews.Console.ExerciseTracker\\ExerciseTracker.Dejmenek\\obj\\",
+        "outputPath": "C:\\Users\\yjin\\OneDrive - soprema\\Documents\\MEGA\\WIP\\01-GitClone\\STUDY.Console.ExerciseTracker\\ExerciseTracker.Dejmenek\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\yjin\\AppData\\Roaming\\NuGet\\NuGet.Config",

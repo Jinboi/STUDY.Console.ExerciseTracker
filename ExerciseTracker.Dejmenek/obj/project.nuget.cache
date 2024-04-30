@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yNqrwrB5YQDL/yerrZTpvuyNlYPSxXz0GeCPwoy5CWAyWYA52qPa+SpTAn5+GsIRrRp4g73E2hA2Qb6rdkby+g==",
+  "dgSpecHash": "a5FM1SfLLgxGeLDSVL+Ya0sl5b47vFJitvaQmXE8loutrbvI0+t1Z5Nz87X4YlrasNf1qfrcjJlThnBBbneRLQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\yjin\\OneDrive - soprema\\Documents\\MEGA\\WIP\\01-GitClone\\CodeReviews.Console.ExerciseTracker\\ExerciseTracker.Dejmenek\\ExerciseTracker.Dejmenek.csproj",
+  "projectFilePath": "C:\\Users\\yjin\\OneDrive - soprema\\Documents\\MEGA\\WIP\\01-GitClone\\STUDY.Console.ExerciseTracker\\ExerciseTracker.Dejmenek\\ExerciseTracker.Dejmenek.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\yjin\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\yjin\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
