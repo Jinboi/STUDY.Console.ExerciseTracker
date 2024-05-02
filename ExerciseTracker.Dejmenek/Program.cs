@@ -3,7 +3,7 @@ using ExerciseTracker.Dejmenek.Data;
 using ExerciseTracker.Dejmenek.Data.Repositories;
 using ExerciseTracker.Dejmenek.Enums;
 using ExerciseTracker.Dejmenek.Helpers;
-using ExerciseTracker.Dejmenek.Services;
+using ExerciseTracker.Dejmenek.Services;    
 
 internal class Program
 {

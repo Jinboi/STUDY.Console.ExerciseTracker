@@ -3,7 +3,7 @@ using ExerciseTracker.Dejmenek.Models;
 
 namespace ExerciseTracker.Dejmenek.Data.Repositories;
 public class ExerciseRepository : IExerciseRepository
-{
+{   
     private readonly ExerciseContext _context;
 
     public ExerciseRepository(ExerciseContext context)
