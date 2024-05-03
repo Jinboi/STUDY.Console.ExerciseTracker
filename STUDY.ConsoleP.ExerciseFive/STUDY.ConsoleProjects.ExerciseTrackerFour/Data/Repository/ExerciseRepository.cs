@@ -13,15 +13,34 @@ internal class ExerciseRepository : IExerciseRepository
         _context.Exercises.Add(exercise);
         _context.SaveChanges();
     }
-
-    public void DeleteExerciseEntry()
+    public void DeleteExerciseEntry(int exerciseId)
     {
-        throw new NotImplementedException();
+        var exercise = _context.Exercises.Find(exerciseId);
+        if (exercise != null)
+        {
+            _context.Exercises.Remove(exercise);
+            _context.SaveChanges();
+        }
+        else
+        {
+            return;
+        }
     }
-
-    public void UpdateExerciseEntry()
+    public void UpdateExerciseEntry(int exerciseId, Exercise newExercise)
     {
-        throw new NotImplementedException();
+        var oldExercise = _context.Exercises.Find(exerciseId);
+        if (oldExercise != null)
+        {
+            oldExercise.StarTime = newExercise.StarTime;
+            oldExercise.EndTime = newExercise.EndTime;
+            oldExercise.Duration = newExercise.Duration;
+        }
+        else
+        {
+            return;
+        }
+
+        _context.SaveChanges();
     }
 
     public void ViewAllExerciseEntries()

@@ -75,85 +75,62 @@ internal class ExerciseService : IExerciseService
         };
 
         _exerciseRepository.AddExerciseEntry(exercise);
-    }     
 
+        Console.WriteLine("AddedExerciseEntry");
+    }     
     public void UpdateExerciseEntry()
     {
         Console.WriteLine("Enter the ID of the exercise entry you want to update:");
-        int id;
-        while (!int.TryParse(Console.ReadLine(), out id))
+        int exerciseId;
+        while (!int.TryParse(Console.ReadLine(), out exerciseId))
         {
             Console.WriteLine("Invalid input. Please enter a valid ID:");
-        }
-
-        using (var context = new ExerciseDbContext())
+        }      
+         
+        Console.WriteLine("Enter the new start time (yyyy-MM-dd HH:mm:ss):");
+        DateTime newStartTime;
+        while (!DateTime.TryParseExact(Console.ReadLine(), "yyyy-MM-dd HH:mm:ss", null, System.Globalization.DateTimeStyles.None, out newStartTime))
         {
-            // Find the exercise entry with the given ID
-            var exercise = context.Exercises.Find(id);
-            if (exercise == null)
-            {
-                Console.WriteLine($"Exercise entry with ID {id} not found.");
-                return;
-            }
-
-            // Ask the user for new start and end times
-            Console.WriteLine("Enter the new start time (yyyy-MM-dd HH:mm:ss):");
-            DateTime newStartTime;
-            while (!DateTime.TryParseExact(Console.ReadLine(), "yyyy-MM-dd HH:mm:ss", null, System.Globalization.DateTimeStyles.None, out newStartTime))
-            {
-                Console.WriteLine("Invalid input. Please enter a valid start time (yyyy-MM-dd HH:mm:ss):");
-            }
-
-            Console.WriteLine("Enter the new end time (yyyy-MM-dd HH:mm:ss):");
-            DateTime newEndTime;
-            while (!DateTime.TryParseExact(Console.ReadLine(), "yyyy-MM-dd HH:mm:ss", null, System.Globalization.DateTimeStyles.None, out newEndTime))
-            {
-                Console.WriteLine("Invalid input. Please enter a valid end time (yyyy-MM-dd HH:mm:ss):");
-            }
-
-            // Update the properties of the exercise entry
-            exercise.StarTime = newStartTime;
-            exercise.EndTime = newEndTime;
-
-            // Save changes to the database
-            context.SaveChanges();
-
-            Console.WriteLine($"Exercise entry with ID {id} updated successfully.");
+            Console.WriteLine("Invalid input. Please enter a valid start time (yyyy-MM-dd HH:mm:ss):");
         }
+
+        Console.WriteLine("Enter the new end time (yyyy-MM-dd HH:mm:ss):");
+        DateTime newEndTime;
+        while (!DateTime.TryParseExact(Console.ReadLine(), "yyyy-MM-dd HH:mm:ss", null, System.Globalization.DateTimeStyles.None, out newEndTime))
+        {
+            Console.WriteLine("Invalid input. Please enter a valid end time (yyyy-MM-dd HH:mm:ss):");
+        }
+
+        TimeSpan newDuration = newEndTime - newStartTime;
+
+        Exercise newExercise = new Exercise
+        {
+            StarTime = newStartTime,
+            EndTime = newEndTime,
+            Duration = newDuration.ToString(@"hh\:mm\:ss")
+        };
+
+        _exerciseRepository.UpdateExerciseEntry(exerciseId, newExercise);
+
+        Console.WriteLine($"Exercise entry with ID {exerciseId} updated successfully.");        
     }
     public void DeleteExerciseEntry()
     {
         Console.WriteLine("Enter the ID of the exercise entry you want to delete:");
-        int id;
-        while (!int.TryParse(Console.ReadLine(), out id))
+        int exerciseId;
+        while (!int.TryParse(Console.ReadLine(), out exerciseId))
         {
             Console.WriteLine("Invalid input. Please enter a valid ID:");
-        }
+        }       
 
-        using (var context = new ExerciseDbContext())
+        Console.WriteLine($"Are you sure you want to delete exercise entry with ID {exerciseId}? (yes/no)");
+        string confirmation = Console.ReadLine().Trim().ToLower();
+        if (confirmation != "yes")
         {
-            // Find the exercise entry with the given ID
-            var exercise = context.Exercises.Find(id);
-            if (exercise == null)
-            {
-                Console.WriteLine($"Exercise entry with ID {id} not found.");
-                return;
-            }
+            _exerciseRepository.DeleteExerciseEntry(exerciseId);
+            return;
+        }          
 
-            // Confirm deletion with the user
-            Console.WriteLine($"Are you sure you want to delete exercise entry with ID {id}? (yes/no)");
-            string confirmation = Console.ReadLine().Trim().ToLower();
-            if (confirmation != "yes")
-            {
-                Console.WriteLine("Deletion canceled.");
-                return;
-            }
-
-            // Remove the exercise entry from the database
-            context.Exercises.Remove(exercise);
-            context.SaveChanges();
-
-            Console.WriteLine($"Exercise entry with ID {id} deleted successfully.");
-        }
+        Console.WriteLine($"Exercise entry with ID {exerciseId} deleted successfully.");        
     }
 }

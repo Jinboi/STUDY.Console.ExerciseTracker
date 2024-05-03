@@ -1,4 +1,5 @@
 ﻿using STUDY.ConsoleProjects.ExerciseTrackerFour.Models;
+using STUDY.ConsoleProjects.ExerciseTrackerFour.Service;
 
 namespace STUDY.ConsoleProjects.ExerciseTrackerFour.Data.Repository;
 internal interface IExerciseRepository
@@ -6,6 +7,6 @@ internal interface IExerciseRepository
     void ViewAllExerciseEntries();
     void ViewSpecificExerciseEntry();
     void AddExerciseEntry(Exercise exercise);
-    void UpdateExerciseEntry();
-    void DeleteExerciseEntry();
+    void UpdateExerciseEntry(int exerciseId, Exercise newExercise);
+    void DeleteExerciseEntry(int exerciseId);
 }
