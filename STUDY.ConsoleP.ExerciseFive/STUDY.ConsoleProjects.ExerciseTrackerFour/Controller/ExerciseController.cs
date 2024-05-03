@@ -1,6 +1,4 @@
-﻿using STUDY.ConsoleProjects.ExerciseTrackerFour.Data;
-using STUDY.ConsoleProjects.ExerciseTrackerFour.Models;
-using STUDY.ConsoleProjects.ExerciseTrackerFour.Service;
+﻿using STUDY.ConsoleProjects.ExerciseTrackerFour.Service;
 
 namespace STUDY.ConsoleProjects.ExerciseTrackerFour.Controller;
 public class ExerciseController

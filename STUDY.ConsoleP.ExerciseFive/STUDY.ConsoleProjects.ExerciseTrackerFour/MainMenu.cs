@@ -62,6 +62,4 @@ internal class MainMenu
             }
         }
     }
-
-
 }

@@ -5,4 +5,5 @@ internal class Exercise
     public DateTime StarTime { get; set; }
     public DateTime EndTime { get; set; }
     public string Duration { get; set; } = null!;
+    public string? Comments { get; set; }
 }

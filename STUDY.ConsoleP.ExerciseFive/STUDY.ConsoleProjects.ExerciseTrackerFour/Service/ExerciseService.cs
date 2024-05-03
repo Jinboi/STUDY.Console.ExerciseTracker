@@ -1,5 +1,4 @@
-﻿using STUDY.ConsoleProjects.ExerciseTrackerFour.Data;
-using STUDY.ConsoleProjects.ExerciseTrackerFour.Data.Repository;
+﻿using STUDY.ConsoleProjects.ExerciseTrackerFour.Data.Repository;
 using STUDY.ConsoleProjects.ExerciseTrackerFour.Models;
 
 namespace STUDY.ConsoleProjects.ExerciseTrackerFour.Service;
@@ -12,49 +11,17 @@ internal class ExerciseService : IExerciseService
     }
     public void ViewAllExerciseEntries()
     {
-        using (var context = new ExerciseDbContext())
-        {
-            var exercises = context.Exercises.ToList();
-            if (exercises.Any())
-            {
-                foreach (var exercise in exercises)
-                {
-                    TimeSpan duration = exercise.EndTime - exercise.StarTime;
-                    Console.WriteLine($@"
-                            Id: {exercise.Id}, 
-                            StartTime: {exercise.StarTime}, 
-                            EndTime: {exercise.EndTime}, 
-                            Duration: {duration}");
-                }
-            }
-            else
-            {
-                Console.WriteLine("No exercise entries found.");
-            }
-        }
+        _exerciseRepository.ViewAllExerciseEntries();
+
+        Console.WriteLine("View All Exercise Entries completed");
+
     }
     public void ViewSpecificExerciseEntry()
-    {
-        using (var context = new ExerciseDbContext())
-        {
-            Console.WriteLine("Enter the ID of the exercise entry you want to view:");
-            int id = int.Parse(Console.ReadLine());
+    {        
+        Console.WriteLine("Enter the ID of the exercise entry you want to view:");
+        int exerciseId = int.Parse(Console.ReadLine());
 
-            var exercise = context.Exercises.FirstOrDefault(e => e.Id == id);
-            if (exercise != null)
-            {
-                TimeSpan duration = exercise.EndTime - exercise.StarTime;
-                Console.WriteLine($@"
-                        Id: {exercise.Id}, 
-                        StartTime: {exercise.StarTime}, 
-                        EndTime: {exercise.EndTime}, 
-                        Duration: {duration}");
-            }
-            else
-            {
-                Console.WriteLine($"Exercise entry with ID {id} not found.");
-            }
-        }
+        _exerciseRepository.ViewSpecificExerciseEntry(exerciseId);        
     }
     public void AddExerciseEntry()
     {        
@@ -64,7 +31,6 @@ internal class ExerciseService : IExerciseService
         Console.WriteLine("Enter the end time of the exercise (yyyy-MM-dd HH:mm:ss):");
         DateTime endTime = DateTime.Parse(Console.ReadLine());
 
-        // Calculate duration
         TimeSpan duration = endTime - startTime;          
 
         Exercise exercise = new Exercise
@@ -76,26 +42,32 @@ internal class ExerciseService : IExerciseService
 
         _exerciseRepository.AddExerciseEntry(exercise);
 
-        Console.WriteLine("AddedExerciseEntry");
+        Console.WriteLine("Added Exercise Entry");
     }     
     public void UpdateExerciseEntry()
     {
         Console.WriteLine("Enter the ID of the exercise entry you want to update:");
+
         int exerciseId;
+
         while (!int.TryParse(Console.ReadLine(), out exerciseId))
         {
             Console.WriteLine("Invalid input. Please enter a valid ID:");
         }      
          
         Console.WriteLine("Enter the new start time (yyyy-MM-dd HH:mm:ss):");
+
         DateTime newStartTime;
+
         while (!DateTime.TryParseExact(Console.ReadLine(), "yyyy-MM-dd HH:mm:ss", null, System.Globalization.DateTimeStyles.None, out newStartTime))
         {
             Console.WriteLine("Invalid input. Please enter a valid start time (yyyy-MM-dd HH:mm:ss):");
         }
 
         Console.WriteLine("Enter the new end time (yyyy-MM-dd HH:mm:ss):");
+
         DateTime newEndTime;
+
         while (!DateTime.TryParseExact(Console.ReadLine(), "yyyy-MM-dd HH:mm:ss", null, System.Globalization.DateTimeStyles.None, out newEndTime))
         {
             Console.WriteLine("Invalid input. Please enter a valid end time (yyyy-MM-dd HH:mm:ss):");

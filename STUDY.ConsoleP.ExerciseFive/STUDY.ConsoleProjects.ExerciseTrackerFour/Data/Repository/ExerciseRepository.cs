@@ -42,14 +42,42 @@ internal class ExerciseRepository : IExerciseRepository
 
         _context.SaveChanges();
     }
-
     public void ViewAllExerciseEntries()
-    {
-        throw new NotImplementedException();
-    }
+    {        
+            var exercises = _context.Exercises.ToList();
 
-    public void ViewSpecificExerciseEntry()
+            if (exercises.Any())
+            {
+                foreach (var exercise in exercises)
+                {
+                    TimeSpan duration = exercise.EndTime - exercise.StarTime;
+                    Console.WriteLine($@"
+                            Id: {exercise.Id}, 
+                            StartTime: {exercise.StarTime}, 
+                            EndTime: {exercise.EndTime}, 
+                            Duration: {duration}");
+                }
+            }
+            else
+            {
+                return;
+            }        
+    }
+    public void ViewSpecificExerciseEntry(int exerciseId)
     {
-        throw new NotImplementedException();
+        var exercise = _context.Exercises.FirstOrDefault(e => e.Id == exerciseId);
+        if (exercise != null)
+        {
+            TimeSpan duration = exercise.EndTime - exercise.StarTime;
+            Console.WriteLine($@"
+                    Id: {exercise.Id}, 
+                    StartTime: {exercise.StarTime}, 
+                    EndTime: {exercise.EndTime}, 
+                    Duration: {duration}");
+        }
+        else
+        {
+            return;
+        }
     }
 }
