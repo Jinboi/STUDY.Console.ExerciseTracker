@@ -12,7 +12,7 @@ using STUDY.ConsoleProjects.ExerciseTrackerFour.Data;
 namespace STUDY.ConsoleProjects.ExerciseTrackerFour.Migrations
 {
     [DbContext(typeof(ExerciseDbContext))]
-    [Migration("20240503170456_Initial-Create")]
+    [Migration("20240505203824_Initial-Create")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -32,6 +32,9 @@ namespace STUDY.ConsoleProjects.ExerciseTrackerFour.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Comments")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Duration")
                         .IsRequired()

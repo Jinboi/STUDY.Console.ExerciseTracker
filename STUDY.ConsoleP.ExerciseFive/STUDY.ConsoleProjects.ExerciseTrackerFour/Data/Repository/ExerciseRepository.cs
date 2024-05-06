@@ -15,69 +15,33 @@ internal class ExerciseRepository : IExerciseRepository
     }
     public void DeleteExerciseEntry(int exerciseId)
     {
-        var exercise = _context.Exercises.Find(exerciseId);
-        if (exercise != null)
-        {
-            _context.Exercises.Remove(exercise);
-            _context.SaveChanges();
-        }
-        else
-        {
-            return;
-        }
+        var exercise = _context.Exercises.Find(exerciseId);        
+        _context.Exercises.Remove(exercise);
+        _context.SaveChanges();        
     }
     public void UpdateExerciseEntry(int exerciseId, Exercise newExercise)
     {
         var oldExercise = _context.Exercises.Find(exerciseId);
-        if (oldExercise != null)
-        {
-            oldExercise.StarTime = newExercise.StarTime;
-            oldExercise.EndTime = newExercise.EndTime;
-            oldExercise.Duration = newExercise.Duration;
-        }
-        else
-        {
-            return;
-        }
+       
+        oldExercise.StarTime = newExercise.StarTime;
+        oldExercise.EndTime = newExercise.EndTime;
+        oldExercise.Duration = newExercise.Duration;
+        oldExercise.Comments = newExercise.Comments;       
 
         _context.SaveChanges();
     }
-    public void ViewAllExerciseEntries()
-    {        
-            var exercises = _context.Exercises.ToList();
-
-            if (exercises.Any())
-            {
-                foreach (var exercise in exercises)
-                {
-                    TimeSpan duration = exercise.EndTime - exercise.StarTime;
-                    Console.WriteLine($@"
-                            Id: {exercise.Id}, 
-                            StartTime: {exercise.StarTime}, 
-                            EndTime: {exercise.EndTime}, 
-                            Duration: {duration}");
-                }
-            }
-            else
-            {
-                return;
-            }        
-    }
-    public void ViewSpecificExerciseEntry(int exerciseId)
+    public Exercise ViewSpecificExerciseEntry(int exerciseId)
     {
         var exercise = _context.Exercises.FirstOrDefault(e => e.Id == exerciseId);
-        if (exercise != null)
-        {
-            TimeSpan duration = exercise.EndTime - exercise.StarTime;
-            Console.WriteLine($@"
-                    Id: {exercise.Id}, 
-                    StartTime: {exercise.StarTime}, 
-                    EndTime: {exercise.EndTime}, 
-                    Duration: {duration}");
-        }
-        else
-        {
-            return;
-        }
+
+        return exercise;
+    }
+    public Exercise GetExerciseEntryById(int exerciseId)
+    {
+        return _context.Exercises.Find(exerciseId)!;
+    }
+    public List<Exercise> GetExercises()
+    {
+        return _context.Exercises.ToList();
     }
 }

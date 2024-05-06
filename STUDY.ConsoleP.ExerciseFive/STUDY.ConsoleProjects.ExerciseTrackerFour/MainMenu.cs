@@ -20,7 +20,8 @@ internal class MainMenu
     {
         var exerciseContext = new ExerciseDbContext();
         var exerciseRepository = new ExerciseRepository(exerciseContext);
-        var exerciseService = new ExerciseService(exerciseRepository);
+        var userInput = new UserInput();
+        var exerciseService = new ExerciseService(exerciseRepository, userInput);
         var exerciseController = new ExerciseController(exerciseService);
 
         while (true)

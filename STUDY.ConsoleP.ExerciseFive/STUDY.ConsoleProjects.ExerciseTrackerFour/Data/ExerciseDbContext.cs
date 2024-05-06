@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using STUDY.ConsoleProjects.ExerciseTrackerFour.Models;
 
 namespace STUDY.ConsoleProjects.ExerciseTrackerFour.Data;
@@ -7,6 +8,10 @@ internal class ExerciseDbContext : DbContext
     public DbSet<Exercise> Exercises { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Data Source = (LocalDB)\\LocalDBDemo; Database = exerciseTrackerDb; Trusted_Connection = true; TrustServerCertificate = true;");
+        var configuration = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.config")
+            .Build();
+
+        optionsBuilder.UseSqlServer(configuration.GetConnectionString("ExerciseDbContext"));
     }
 }

@@ -1,85 +1,88 @@
-﻿using STUDY.ConsoleProjects.ExerciseTrackerFour.Data.Repository;
+﻿using Spectre.Console;
+using STUDY.ConsoleProjects.ExerciseTrackerFour.Data.Repository;
 using STUDY.ConsoleProjects.ExerciseTrackerFour.Models;
 
 namespace STUDY.ConsoleProjects.ExerciseTrackerFour.Service;
 internal class ExerciseService : IExerciseService
 {
     private readonly IExerciseRepository _exerciseRepository;
-    public ExerciseService(IExerciseRepository exerciseRepository)
+    private readonly IUserInput _UserInput;
+    public ExerciseService(IExerciseRepository exerciseRepository, IUserInput userInput)
     {
         _exerciseRepository = exerciseRepository;
+        _UserInput = userInput;
     }
     public void ViewAllExerciseEntries()
     {
-        _exerciseRepository.ViewAllExerciseEntries();
+        var exercises = _exerciseRepository.GetExercises();
+
+        if (exercises.Count == 0)
+        {
+            AnsiConsole.MarkupLine("404 - Cannot be found");
+            MainMenu.ShowMainMenu();
+        }
+
+        else
+        {
+            DataVisualization.ShowDataInTable(exercises);
+        }
 
         Console.WriteLine("View All Exercise Entries completed");
-
-    }
+    } 
     public void ViewSpecificExerciseEntry()
     {        
         Console.WriteLine("Enter the ID of the exercise entry you want to view:");
-        int exerciseId = int.Parse(Console.ReadLine());
+        int exerciseId = int.Parse(Console.ReadLine());        
 
-        _exerciseRepository.ViewSpecificExerciseEntry(exerciseId);        
-    }
+        Exercise? selectedExercise = _exerciseRepository.GetExerciseEntryById(exerciseId);
+
+        if (selectedExercise is null)
+        {
+            AnsiConsole.MarkupLine("404 - Cannot be found");
+            MainMenu.ShowMainMenu();
+        }              
+
+        Exercise exercise = _exerciseRepository.ViewSpecificExerciseEntry(exerciseId);
+
+        DataVisualization.ShowSingleExercise(exercise);        
+    }    
     public void AddExerciseEntry()
-    {        
-        Console.WriteLine("Enter the start time of the exercise (yyyy-MM-dd HH:mm:ss):");
-        DateTime startTime = DateTime.Parse(Console.ReadLine());
-
-        Console.WriteLine("Enter the end time of the exercise (yyyy-MM-dd HH:mm:ss):");
-        DateTime endTime = DateTime.Parse(Console.ReadLine());
-
-        TimeSpan duration = endTime - startTime;          
+    {
+        var (startTime, endTime, duration, comments) = _UserInput.GetUserInputForExcerciseEntry();
 
         Exercise exercise = new Exercise
         {
             StarTime = startTime,
             EndTime = endTime,
-            Duration = duration.ToString(@"hh\:mm\:ss")
+            Duration = duration.ToString(@"hh\:mm\:ss"),
+            Comments = comments
         };
 
         _exerciseRepository.AddExerciseEntry(exercise);
 
         Console.WriteLine("Added Exercise Entry");
-    }     
+    } 
     public void UpdateExerciseEntry()
     {
-        Console.WriteLine("Enter the ID of the exercise entry you want to update:");
+        Console.WriteLine("Enter the ID of the exercise entry you want to Update:");
+        int checkExerciseId = int.Parse(Console.ReadLine());
 
-        int exerciseId;
+         Exercise? selectedExercise = _exerciseRepository.GetExerciseEntryById(checkExerciseId);
 
-        while (!int.TryParse(Console.ReadLine(), out exerciseId))
+        if (selectedExercise is null)
         {
-            Console.WriteLine("Invalid input. Please enter a valid ID:");
-        }      
-         
-        Console.WriteLine("Enter the new start time (yyyy-MM-dd HH:mm:ss):");
-
-        DateTime newStartTime;
-
-        while (!DateTime.TryParseExact(Console.ReadLine(), "yyyy-MM-dd HH:mm:ss", null, System.Globalization.DateTimeStyles.None, out newStartTime))
-        {
-            Console.WriteLine("Invalid input. Please enter a valid start time (yyyy-MM-dd HH:mm:ss):");
+            AnsiConsole.MarkupLine("404 - Cannot be found");
+            MainMenu.ShowMainMenu();
         }
 
-        Console.WriteLine("Enter the new end time (yyyy-MM-dd HH:mm:ss):");
-
-        DateTime newEndTime;
-
-        while (!DateTime.TryParseExact(Console.ReadLine(), "yyyy-MM-dd HH:mm:ss", null, System.Globalization.DateTimeStyles.None, out newEndTime))
-        {
-            Console.WriteLine("Invalid input. Please enter a valid end time (yyyy-MM-dd HH:mm:ss):");
-        }
-
-        TimeSpan newDuration = newEndTime - newStartTime;
-
+        var (newStartTime, newEndTime, newDuration, newComments, exerciseId) = _UserInput.GetUserInputForUpdatedExcerciseEntry();
+                
         Exercise newExercise = new Exercise
         {
             StarTime = newStartTime,
             EndTime = newEndTime,
-            Duration = newDuration.ToString(@"hh\:mm\:ss")
+            Duration = newDuration.ToString(@"hh\:mm\:ss"),
+            Comments = newComments
         };
 
         _exerciseRepository.UpdateExerciseEntry(exerciseId, newExercise);
@@ -88,20 +91,20 @@ internal class ExerciseService : IExerciseService
     }
     public void DeleteExerciseEntry()
     {
-        Console.WriteLine("Enter the ID of the exercise entry you want to delete:");
-        int exerciseId;
-        while (!int.TryParse(Console.ReadLine(), out exerciseId))
-        {
-            Console.WriteLine("Invalid input. Please enter a valid ID:");
-        }       
+        Console.WriteLine("Enter the ID of the exercise entry you want to Delete:");
+        int checkExerciseId = int.Parse(Console.ReadLine());
 
-        Console.WriteLine($"Are you sure you want to delete exercise entry with ID {exerciseId}? (yes/no)");
-        string confirmation = Console.ReadLine().Trim().ToLower();
-        if (confirmation != "yes")
+        Exercise? selectedExercise = _exerciseRepository.GetExerciseEntryById(checkExerciseId);
+
+        if (selectedExercise is null)
         {
-            _exerciseRepository.DeleteExerciseEntry(exerciseId);
-            return;
-        }          
+            AnsiConsole.MarkupLine("404 - Cannot be found");
+            MainMenu.ShowMainMenu();
+        }
+
+        int exerciseId = _UserInput.GetUserInputToDelete();
+
+        _exerciseRepository.DeleteExerciseEntry(exerciseId);         
 
         Console.WriteLine($"Exercise entry with ID {exerciseId} deleted successfully.");        
     }

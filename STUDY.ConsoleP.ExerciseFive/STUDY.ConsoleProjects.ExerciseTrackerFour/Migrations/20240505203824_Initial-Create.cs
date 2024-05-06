@@ -19,7 +19,8 @@ namespace STUDY.ConsoleProjects.ExerciseTrackerFour.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StarTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Duration = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Duration = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Comments = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
